@@ -25,9 +25,12 @@ public class RestApi {
                 .onFailMessage("Request get application status failed")
                 .statusCode(HttpStatus.SC_OK);
 
-
         return response;
     }
+
+    public Response getToken(){}
+
+
 
 
 }
