@@ -40,7 +40,7 @@ public class RestApi {
 
 //        final var request = given()
 //                .log().all()
-//                .contentType("application/json")
+//                .contentType("application/json")/
 //                .body(userBody);
 //
 //        final var response = request.post(properties.getUrlBase() + properties.getLOGIN());
