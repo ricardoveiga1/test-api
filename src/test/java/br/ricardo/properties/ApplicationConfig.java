@@ -14,6 +14,9 @@ public class ApplicationConfig {
     private String urlBase;
 
     private String LOGIN = "/auth/login";
-    private String SINGLE_VIDEO_GAMES = "/videogame/{videoGameId}";
+    private String GET_CURRENT_USER = "/auth/me";
+    private String GET_ALL_PRODUCTS = "/products";
+    private String ADD_PRODUCT = "/products/add";
+    private String GET_SINGLE_PRODUCT = "/products/{idProduct}";
 
 }

@@ -3,6 +3,7 @@ package br.ricardo.suport.apiClient;
 
 import br.ricardo.properties.ApplicationConfig;
 import br.ricardo.suport.dto.User;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +14,21 @@ import static io.restassured.RestAssured.given;
 @Component
 public class RestApi {
 
+//    https://dummyjson.com/auth/users ok
+//    https://dummyjson.com/auth/login ok
 
+//    https://dummyjson.com/auth/products x
+//    https://dummyjson.com/products/add ok
+//    https://dummyjson.com/products ok
+//    https://dummyjson.com/products/{productId}
 
     @Autowired
     ApplicationConfig properties;
 
     public Response getSetup(){
         final var request = given()
-                .contentType("application/json");
+                //.contentType("application/json")
+        ;
 
         final var response = request.get(properties.getUrlBase() + "/test");
 
@@ -31,26 +39,93 @@ public class RestApi {
         return response;
     }
 
-    public Response loginAndGetToken(){
-        User userBody = new User("emilys", "emilyspass", 30);
-        given()
-                .body(userBody)
-                .when()
-                .post(properties.getUrlBase() + properties.getLOGIN())
+    public Response getToken(){
+        User user = new User();
 
-//        final var request = given()
-//                .log().all()
-//                .contentType("application/json")/
-//                .body(userBody);
-//
-//        final var response = request.post(properties.getUrlBase() + properties.getLOGIN());
-//
-//        response.then().log().all()
-//                .onFailMessage("Request post application login and token")
-//                .statusCode(HttpStatus.SC_OK);
-//
-//        return response;
+        Response response =
+                given()
+                .contentType("application/json")
+                .body(user)
+                .post(properties.getUrlBase() + properties.getLOGIN());
 
+        response
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.SC_OK);
+
+        return response;
+    }
+
+    public Response getCurrentUser(){
+
+        final var token = getToken().then().extract().path("accessToken");
+
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .header("Authorization", "Bearer " + token)
+                        .header("credentials", "include")
+                        .get(properties.getUrlBase() + properties.getGET_CURRENT_USER());
+
+        response.prettyPrint();
+        response
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.SC_OK);
+
+        return response;
+    }
+
+    public Response getAllProducts(){
+
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .get(properties.getUrlBase() + properties.getGET_ALL_PRODUCTS());
+
+        response.prettyPrint();
+        response
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.SC_OK);
+
+        return response;
+    }
+
+    public Response addProduct(){
+
+        String bodyProduct = "{\"title\": \"BMW Pencil\"}";
+
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .body(bodyProduct)
+                        .post(properties.getUrlBase() + properties.getADD_PRODUCT());
+
+        response.prettyPrint();
+        response
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.SC_CREATED);
+
+        return response;
+    }
+
+    public Response getProductId(){
+
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .pathParams("idProduct", 5)
+                        .get(properties.getUrlBase() + properties.getGET_SINGLE_PRODUCT());
+
+        response.prettyPrint();
+        response
+                .then()
+                .contentType(ContentType.JSON)
+                .statusCode(HttpStatus.SC_OK);
+
+        return response;
     }
 
 
