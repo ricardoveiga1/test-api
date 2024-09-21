@@ -13,4 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
     private String urlBase;
 
+    private String LOGIN = "/auth/login";
+    private String SINGLE_VIDEO_GAMES = "/videogame/{videoGameId}";
+
 }

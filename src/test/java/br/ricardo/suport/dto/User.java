@@ -1,4 +1,4 @@
-package br.ricardo.suport.domain;
+package br.ricardo.suport.dto;
 
 public class User {
     private String token;
@@ -9,18 +9,21 @@ public class User {
     private String firstName;
     private String lastName;
     private String gender;
+    private String password;
+    private Integer expiresInMins;
 
 
-    public User(String token, String refreshToken, Integer id, String username, String email, String firstName, String lastName, String gender) {
-        this.token = token;
-        this.refreshToken = refreshToken;
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
+    public User(){
+
     }
+
+
+    public User(String username, String password, Integer expiresInMins) {
+        this.username = username;
+        this.password = password;
+        this.expiresInMins = expiresInMins;
+    }
+
 
     public String getToken() {
         return token;
@@ -84,5 +87,22 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+
+    public Integer getExpiresInMins() {
+        return expiresInMins;
+    }
+
+    public void setExpiresInMins(Integer expiresInMins) {
+        this.expiresInMins = expiresInMins;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
