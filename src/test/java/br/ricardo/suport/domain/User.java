@@ -1,6 +1,5 @@
-package br.ricardo.suport.dto;
+package br.ricardo.suport.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

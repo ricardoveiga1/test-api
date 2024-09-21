@@ -2,7 +2,7 @@ package br.ricardo.suport.apiClient;
 
 
 import br.ricardo.properties.ApplicationConfig;
-import br.ricardo.suport.dto.User;
+import br.ricardo.suport.domain.User;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
