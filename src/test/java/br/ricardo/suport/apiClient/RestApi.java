@@ -27,7 +27,7 @@ public class RestApi {
 
     public Response getSetup(){
         final var request = given()
-                //.contentType("application/json")
+                .contentType("application/json")
         ;
 
         final var response = request.get(properties.getUrlBase() + "/test");

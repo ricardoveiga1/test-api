@@ -58,7 +58,7 @@ public class ApiFunctionalTest extends SpringContextInit {
                 .body("products[0].id", is(1))
                 .body("products[0].title", is("Essence Mascara Lash Princess"))
                 .body("products[0].price", is(9.99F));
-        //implemente mais validaççoes, olhar curso rest assured fundamentals
+        //implemente mais validaçoes
     }
 
     @Test
