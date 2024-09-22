@@ -4,13 +4,15 @@ import br.ricardo.Config;
 import br.ricardo.context.SpringContextInit;
 import br.ricardo.suport.apiClient.RestApi;
 import br.ricardo.suport.domain.User;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 @SpringBootTest(classes = Config.class)
 public class ApiFunctionalTest extends SpringContextInit {
@@ -19,7 +21,7 @@ public class ApiFunctionalTest extends SpringContextInit {
     private RestApi restApi;
 
     @Test
-    public void validateApiTest(){
+    public void shouldValidateApiTest(){
        Response response =  restApi.getSetup();
        response.getBody().prettyPrint();
 
@@ -28,19 +30,21 @@ public class ApiFunctionalTest extends SpringContextInit {
     }
 
     @Test
-    public void validateLoginAndToken(){
+    public void shouldValidateLoginAndToken(){
         Response response = restApi.getToken();
         response.getBody().prettyPrint();
         response.getBody().as(User.class);
         response.then()
                 .statusCode(HttpStatus.SC_OK)
+                //contract test
+                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("loginToken.json"))
                 .body("accessToken", is(notNullValue()))
                 .body("id", is(1))
                 .body("username", is("emilys"));
     }
 
     @Test
-    public void getCurrentUser(){
+    public void shouldGetCurrentUser(){
         Response response = restApi.getCurrentUser();
         response.then()
                 .statusCode(HttpStatus.SC_OK)
@@ -50,7 +54,7 @@ public class ApiFunctionalTest extends SpringContextInit {
     }
 
     @Test
-    public void getAllProducts(){
+    public void shouldGetAllProducts(){
 
         Response response = restApi.getAllProducts();
         response.then()
@@ -62,7 +66,7 @@ public class ApiFunctionalTest extends SpringContextInit {
     }
 
     @Test
-    public void addProduct(){
+    public void shouldAddProduct(){
 
         Response response = restApi.addProduct();
         response.then()
@@ -72,8 +76,12 @@ public class ApiFunctionalTest extends SpringContextInit {
     }
 
     @Test
-    public void getProductId(){
-        Response response = restApi.getProductId();
+    public void shouldGetProductId(){
+        Response response = restApi.getProductId(5);
+        response.then()
+                .statusCode(HttpStatus.SC_OK)
+                .body("id", is(5))
+                .body("title", is("Red Nail Polish"));
     }
 
 

@@ -9,6 +9,7 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static br.ricardo.suport.utils.DummyUtils.getTokenUtils;
 import static io.restassured.RestAssured.given;
 
 @Component
@@ -58,7 +59,8 @@ public class RestApi {
 
     public Response getCurrentUser(){
 
-        final var token = getToken().then().extract().path("accessToken");
+        //final var token = getToken().then().extract().path("accessToken");
+        final var token = getTokenUtils();
 
         Response response =
                 given()
@@ -111,12 +113,12 @@ public class RestApi {
         return response;
     }
 
-    public Response getProductId(){
+    public Response getProductId(Integer idProduct){
 
         Response response =
                 given()
                         .contentType("application/json")
-                        .pathParams("idProduct", 5)
+                        .pathParams("idProduct", idProduct)
                         .get(properties.getUrlBase() + properties.getGET_SINGLE_PRODUCT());
 
         response.prettyPrint();

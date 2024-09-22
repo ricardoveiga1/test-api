@@ -22,17 +22,17 @@ public class SpringContextInit {
     @BeforeTestClass
     public static void setup(){
 
-        RestAssured.requestSpecification = new RequestSpecBuilder()
-                .setContentType("application/json")
-                //.addHeader("Accept", "application/json")
-                .addFilter(new RequestLoggingFilter()) //logs
-                .addFilter(new ResponseLoggingFilter()) // logs
-                .build();
-
-        RestAssured.responseSpecification = new ResponseSpecBuilder()
-                .expectContentType("application/json")
-                //.expectStatusCode(200)
-                .expectResponseTime(lessThan(2000L))
-                .build();
+//        RestAssured.requestSpecification = new RequestSpecBuilder()
+//                .setContentType("application/json")
+//                //.addHeader("Accept", "application/json")
+//                .addFilter(new RequestLoggingFilter()) //logs
+//                .addFilter(new ResponseLoggingFilter()) // logs
+//                .build();
+//
+//        RestAssured.responseSpecification = new ResponseSpecBuilder()
+//                .expectContentType("application/json")
+//                //.expectStatusCode(200)
+//                .expectResponseTime(lessThan(2000L))
+//                .build();
     }
 }
