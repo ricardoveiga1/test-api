@@ -11,8 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(classes = Config.class)
 public class ApiFunctionalTest extends SpringContextInit {
@@ -24,7 +23,7 @@ public class ApiFunctionalTest extends SpringContextInit {
     public void shouldValidateApiTest(){
        Response response =  restApi.getSetup();
        response.getBody().prettyPrint();
-
+       response.then().time(lessThan(2000L));
        response.then().body("status", is("ok"));
        response.then().body("method", is("GET"));
     }
@@ -55,7 +54,6 @@ public class ApiFunctionalTest extends SpringContextInit {
 
     @Test
     public void shouldGetAllProducts(){
-
         Response response = restApi.getAllProducts();
         response.then()
                 .statusCode(HttpStatus.SC_OK)
@@ -67,7 +65,6 @@ public class ApiFunctionalTest extends SpringContextInit {
 
     @Test
     public void shouldAddProduct(){
-
         Response response = restApi.addProduct();
         response.then()
                 .statusCode(HttpStatus.SC_CREATED)
@@ -83,7 +80,4 @@ public class ApiFunctionalTest extends SpringContextInit {
                 .body("id", is(5))
                 .body("title", is("Red Nail Polish"));
     }
-
-
-
 }

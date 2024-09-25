@@ -15,14 +15,6 @@ import static io.restassured.RestAssured.given;
 @Component
 public class RestApi {
 
-//    https://dummyjson.com/auth/users ok
-//    https://dummyjson.com/auth/login ok
-
-//    https://dummyjson.com/auth/products x
-//    https://dummyjson.com/products/add ok
-//    https://dummyjson.com/products ok
-//    https://dummyjson.com/products/{productId}
-
     @Autowired
     ApplicationConfig properties;
 
@@ -47,7 +39,7 @@ public class RestApi {
                 given()
                 .contentType("application/json")
                 .body(user)
-                .post(properties.getUrlBase() + properties.getLOGIN());
+                .post(properties.getUrlBase() + properties.getLogin());
 
         response
                 .then()
@@ -67,7 +59,7 @@ public class RestApi {
                         .contentType("application/json")
                         .header("Authorization", "Bearer " + token)
                         .header("credentials", "include")
-                        .get(properties.getUrlBase() + properties.getGET_CURRENT_USER());
+                        .get(properties.getUrlBase() + properties.getGetCurrentUser());
 
         response.prettyPrint();
         response
@@ -83,7 +75,7 @@ public class RestApi {
         Response response =
                 given()
                         .contentType("application/json")
-                        .get(properties.getUrlBase() + properties.getGET_ALL_PRODUCTS());
+                        .get(properties.getUrlBase() + properties.getGetAllProducts());
 
         response.prettyPrint();
         response
@@ -102,7 +94,7 @@ public class RestApi {
                 given()
                         .contentType("application/json")
                         .body(bodyProduct)
-                        .post(properties.getUrlBase() + properties.getADD_PRODUCT());
+                        .post(properties.getUrlBase() + properties.getAddProduct());
 
         response.prettyPrint();
         response
@@ -119,7 +111,7 @@ public class RestApi {
                 given()
                         .contentType("application/json")
                         .pathParams("idProduct", idProduct)
-                        .get(properties.getUrlBase() + properties.getGET_SINGLE_PRODUCT());
+                        .get(properties.getUrlBase() + properties.getGetSingleProduct());
 
         response.prettyPrint();
         response

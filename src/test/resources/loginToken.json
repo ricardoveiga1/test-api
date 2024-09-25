@@ -17,7 +17,7 @@
   ],
   "properties": {
     "accessToken": {
-      "type": "integer",
+      "type": "string",
       "default": "",
       "title": "The accessToken Schema",
       "examples": [
