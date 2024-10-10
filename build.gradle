@@ -22,6 +22,12 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured:5.5.0'
     testImplementation 'io.rest-assured:json-path:5.5.0'
 
+   //relatório
+    implementation 'io.qameta.allure:allure-rest-assured:2.29.0'
+    implementation 'io.qameta.allure:allure-junit-platform:2.29.0'
+
+
+
     testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.18.0-rc1'
     implementation 'io.rest-assured:json-schema-validator:5.5.0'
     testImplementation 'org.assertj:assertj-core:3.26.3' // estudar para aprender utilizar, pode ser uma troca do hamcrast

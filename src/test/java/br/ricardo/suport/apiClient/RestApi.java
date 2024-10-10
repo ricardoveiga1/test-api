@@ -3,6 +3,7 @@ package br.ricardo.suport.apiClient;
 
 import br.ricardo.properties.ApplicationConfig;
 import br.ricardo.suport.domain.User;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -19,7 +20,7 @@ public class RestApi {
     ApplicationConfig properties;
 
     public Response getSetup(){
-        final var request = given()
+        final var request = given().filter(new AllureRestAssured())
                 .contentType("application/json")
         ;
 
@@ -27,6 +28,20 @@ public class RestApi {
 
         response.then()
                 .onFailMessage("Request get application status failed")
+                .statusCode(HttpStatus.SC_OK);
+
+        return response;
+    }
+
+    public Response getUser(){
+        Response response =
+                given()
+                        .contentType("application/json")
+                        .get(properties.getUrlBase() + properties.getUsers());
+
+        response
+                .then()
+                .onFailMessage("Failed to get users")
                 .statusCode(HttpStatus.SC_OK);
 
         return response;
@@ -50,7 +65,6 @@ public class RestApi {
     }
 
     public Response getCurrentUser(){
-
         //final var token = getToken().then().extract().path("accessToken");
         final var token = getTokenUtils();
 
