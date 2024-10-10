@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "application")
 public class ApplicationConfig {
     private String urlBase;
+    private String users;
     private String login;
     private String getCurrentUser;
     private String getAllProducts;
