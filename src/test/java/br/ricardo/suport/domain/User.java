@@ -26,13 +26,4 @@ public class User {
     private String password = "emilyspass";
     @Builder.Default
     private Integer expiresInMins = 30;
-
-
-    public User(String username, String password, Integer expiresInMins) {
-        super();
-        this.username = username;
-        this.password = password;
-        this.expiresInMins = expiresInMins;
-    }
-
 }
