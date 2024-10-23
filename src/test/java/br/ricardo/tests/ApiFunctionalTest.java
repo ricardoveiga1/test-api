@@ -44,10 +44,10 @@ public class ApiFunctionalTest extends SpringContextInit {
         users = response.getBody().as(Users.class);
         response.getBody().prettyPrint();
 
-//        users.getUsers().forEach(user -> {
-//            Assertions.assertNotNull(user.getUsername());
-//            Assertions.assertNotNull(user.getPassword());
-//        });
+        users.getUsers().forEach(user -> {
+            Assertions.assertNotNull(user.getUsername());
+            Assertions.assertNotNull(user.getPassword());
+        });
     }
 
 
@@ -88,7 +88,7 @@ public class ApiFunctionalTest extends SpringContextInit {
                 .body("products[0].price", is(9.99F));
 
         Product product = response.getBody().as(Product.class);
-
+//breakpoint
         System.out.println(product.toString());
         //implemente mais validaçoes
     }
