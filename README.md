@@ -1,5 +1,6 @@
 ./gradlew test
 
+brew install allure
 allure server
 
 https://dummyjson.com/

@@ -21,8 +21,7 @@ public class RestApi {
 
     public Response getSetup(){
         final var request = given().filter(new AllureRestAssured())
-                .contentType("application/json")
-        ;
+                .contentType("application/json");
 
         final var response = request.get(properties.getUrlBase() + "/test");
 
@@ -36,6 +35,7 @@ public class RestApi {
     public Response getUser(){
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .contentType("application/json")
                         .get(properties.getUrlBase() + properties.getUsers());
 
@@ -52,9 +52,10 @@ public class RestApi {
 
         Response response =
                 given()
-                .contentType("application/json")
-                .body(user)
-                .post(properties.getUrlBase() + properties.getLogin());
+                        .filter(new AllureRestAssured())
+                        .contentType("application/json")
+                        .body(user)
+                        .post(properties.getUrlBase() + properties.getLogin());
 
         response
                 .then()
@@ -70,6 +71,7 @@ public class RestApi {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .contentType("application/json")
                         .header("Authorization", "Bearer " + token)
                         .header("credentials", "include")
@@ -88,6 +90,7 @@ public class RestApi {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .contentType("application/json")
                         .get(properties.getUrlBase() + properties.getGetAllProducts());
 
@@ -106,6 +109,7 @@ public class RestApi {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .contentType("application/json")
                         .body(bodyProduct)
                         .post(properties.getUrlBase() + properties.getAddProduct());
@@ -123,6 +127,7 @@ public class RestApi {
 
         Response response =
                 given()
+                        .filter(new AllureRestAssured())
                         .contentType("application/json")
                         .pathParams("idProduct", idProduct)
                         .get(properties.getUrlBase() + properties.getGetSingleProduct());
@@ -135,8 +140,4 @@ public class RestApi {
 
         return response;
     }
-
-
-
-
 }
