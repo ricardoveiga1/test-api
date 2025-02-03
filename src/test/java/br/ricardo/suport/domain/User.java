@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class User {
     private String token;
     private String refreshToken;
-    private Integer id;
+    private int id;
     @Builder.Default
     private String username = "emilys";
     private String email;
@@ -25,5 +25,5 @@ public class User {
     @Builder.Default
     private String password = "emilyspass";
     @Builder.Default
-    private Integer expiresInMins = 30;
+    private int expiresInMins = 30;
 }

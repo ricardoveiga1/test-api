@@ -1,8 +1,0 @@
-application:
-  urlBase: https://dummyjson.com
-  users: /users
-  login : /auth/login
-  getCurrentUser : /auth/me
-  getAllProducts : /products
-  addProduct : /products/add
-  getSingleProduct : /products/{idProduct}

@@ -13,10 +13,12 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
     private String urlBase;
     private String users;
-    private String login;
-    private String getCurrentUser;
-    private String getAllProducts;
+    private String authLogin;
+    private String currentProducts;
+    private String allProducts;
     private String addProduct;
-    private String getSingleProduct;
+    private String singleProduct;
+
+    private String expiredToken;
 
 }

@@ -15,7 +15,7 @@ import org.springframework.test.context.event.annotation.BeforeTestClass;
 import static org.hamcrest.Matchers.lessThan;
 
 @EnableConfigurationProperties
-@ActiveProfiles("test")
+@ActiveProfiles("qa")
 @SpringBootTest(classes = Config.class)
 public class SpringContextInit {
 
